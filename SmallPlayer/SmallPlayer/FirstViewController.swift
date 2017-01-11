@@ -39,12 +39,14 @@ extension FirstViewController: UITableViewDataSource, UITableViewDelegate {
 	}
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
+		defer {
+			tableView.deselectRow(at: indexPath, animated: true)
+		}
+		
 		let playerViewController =
 			UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PlayerViewController") as! PlayerViewController
 		playerViewController.modalPresentationStyle = .overCurrentContext
 		playerViewController.modalTransitionStyle = .crossDissolve
 		UIApplication.shared.keyWindow?.rootViewController?.present(playerViewController, animated: true, completion: nil)
-//		tabBarController?.present(playerViewController, animated: true, completion: nil)
 	}
 }

@@ -2,7 +2,7 @@
 //  PlayerViewController.swift
 //  SmallPlayer
 //
-//  Created by 李国锋 on 17/1/8.
+//  Created by dirtmelon on 17/1/8.
 //  Copyright © 2017年 dirtmelon. All rights reserved.
 //
 
@@ -10,13 +10,24 @@ import UIKit
 
 class PlayerViewController: UIViewController {
 
-	var shouldCompleteTransition = false
+	let offsetX = UIScreen.main.bounds.width / 2 - 10
+	let offsetY = UIScreen.main.bounds.height / 2 - 60
 	
+	var panGestureRecognizer: UIPanGestureRecognizer {
+		return UIPanGestureRecognizer(target: self,
+			action: #selector(PlayerViewController.handleWithPanGestureRecognizer(_:)))
+	}
+	
+	var tapGestureRecognizer: UITapGestureRecognizer {
+		return UITapGestureRecognizer(target: self,
+			action: #selector(PlayerViewController.handleWithTapGestureRecognizer(_:)))
+	}
+	
+	var shouldCompleteAnimation = false
     override func viewDidLoad() {
         super.viewDidLoad()
-		let panGestureRecognizer =
-			UIPanGestureRecognizer(target: self, action: #selector(PlayerViewController.handle(_:)))
 		view.addGestureRecognizer(panGestureRecognizer)
+		view.addGestureRecognizer(tapGestureRecognizer)
     }
 	
 	@IBAction func dismiss(_ sender: UIBarButtonItem) {
@@ -29,25 +40,41 @@ class PlayerViewController: UIViewController {
 		})
 	}
 	
-	func handle(_ gestureRecognizer: UIPanGestureRecognizer) {
-		let viewTranslation = gestureRecognizer.translation(in: gestureRecognizer.view!.superview!)
-		switch gestureRecognizer.state {
-//		case .began:
-//			transitionInProgress = true
+	func handleWithPanGestureRecognizer(_ panGestureRecognizer: UIPanGestureRecognizer) {
+		switch panGestureRecognizer.state {
+			
 		case .changed:
 			let bounds = UIScreen.main.bounds
-			
-			let const = CGFloat(fminf(fmaxf(Float(viewTranslation.y / bounds.height), 0.0), 1.0))
-			shouldCompleteTransition = const > 0.5
-			
+			let moveY = panGestureRecognizer.translation(in: panGestureRecognizer.view?.superview!).y
+			let const = CGFloat(fminf(fmaxf(Float(moveY / bounds.height), 0.0), 1.0))
+			shouldCompleteAnimation = const > 0.5
+			if !shouldCompleteAnimation {
+				UIView.animate(withDuration: 0.01, animations: {
+					self.view.superview?.transform =
+						CGAffineTransform(a: 1 - const, b: 0, c: 0, d: 1 - const, tx: self.offsetX * const, ty: self.offsetY * const)
+				})
+			}
 		case .cancelled, .ended:
-			if !shouldCompleteTransition || gestureRecognizer.state == .cancelled {
-				
+			if !shouldCompleteAnimation || panGestureRecognizer.state == .cancelled {
+				UIView.animate(withDuration: 0.3, animations: {
+					self.view.superview?.transform = CGAffineTransform.identity
+				})
 			} else {
-				
+				self.view.removeGestureRecognizer(panGestureRecognizer)
 			}
 		default:
-			print("Swift switch must be exhaustive, thus the default")
+			break
+		}
+	}
+	
+	func handleWithTapGestureRecognizer(_ tapGestureRecognizer: UITapGestureRecognizer) {
+		if shouldCompleteAnimation {
+			UIView.animate(withDuration: 0.3, animations: {
+				self.view.superview?.transform = CGAffineTransform.identity
+				self.view.addGestureRecognizer(self.panGestureRecognizer)
+			})
+		} else {
+			// tanru
 		}
 	}
 

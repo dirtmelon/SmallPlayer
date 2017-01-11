@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  SmallPlayer
 //
-//  Created by 李国锋 on 17/1/4.
+//  Created by dirtmelon on 17/1/4.
 //  Copyright © 2017年 dirtmelon. All rights reserved.
 //
 

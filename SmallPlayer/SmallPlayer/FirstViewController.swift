@@ -43,10 +43,7 @@ extension FirstViewController: UITableViewDataSource, UITableViewDelegate {
 			tableView.deselectRow(at: indexPath, animated: true)
 		}
 		
-		let playerViewController =
-			UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PlayerViewController") as! PlayerViewController
-		playerViewController.modalPresentationStyle = .overCurrentContext
-		playerViewController.modalTransitionStyle = .crossDissolve
-		UIApplication.shared.keyWindow?.rootViewController?.present(playerViewController, animated: true, completion: nil)
+		PlayerViewController.presentPlayerViewController()
+//		UIApplication.shared.keyWindow?.rootViewController?.present(playerViewController!, animated: true, completion: nil)
 	}
 }

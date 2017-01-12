@@ -171,10 +171,43 @@
                         </constraints>
                     </view>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
+                    <connections>
+                        <outlet property="navigationBar" destination="hhI-vx-uCb" id="UkG-FD-zjh"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wS5-C3-eLs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2130" y="-178"/>
+            <point key="canvasLocation" x="2129" y="-478"/>
+        </scene>
+        <!--Another View Controller-->
+        <scene sceneID="PBh-ti-kq8">
+            <objects>
+                <viewController storyboardIdentifier="AnotherViewController" id="HuC-0K-0k0" customClass="AnotherViewController" customModule="SmallPlayer" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="57H-vl-Int"/>
+                        <viewControllerLayoutGuide type="bottom" id="8Yb-T9-54n"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="PBa-OY-QLT">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AnotherViewController" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RRr-KP-ioC">
+                                <rect key="frame" x="100.5" y="323" width="173.5" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="RRr-KP-ioC" firstAttribute="centerY" secondItem="PBa-OY-QLT" secondAttribute="centerY" id="Mb2-cH-fik"/>
+                            <constraint firstItem="RRr-KP-ioC" firstAttribute="centerX" secondItem="PBa-OY-QLT" secondAttribute="centerX" id="lbq-eB-YgC"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7pd-cW-qlA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2129" y="238"/>
         </scene>
     </scenes>
 </document>

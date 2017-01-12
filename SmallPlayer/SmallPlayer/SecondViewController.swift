@@ -38,6 +38,7 @@ extension SecondViewController: UITableViewDataSource, UITableViewDelegate {
 	}
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		
+		let anotherViewController = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AnotherViewController")
+		navigationController?.pushViewController(anotherViewController, animated: true)
 	}
 }
